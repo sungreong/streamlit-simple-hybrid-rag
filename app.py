@@ -130,17 +130,17 @@ def main():
             # AI 제공자 및 모델 선택
             provider = st.selectbox(
                 "AI 제공자",
-                ["OpenAI", "Gemini"],
+                ["Gemini", "OpenAI"],
                 help="사용할 AI 서비스를 선택하세요",
                 key="qa_provider"
             )
             
             if provider == "OpenAI":
-                model_options = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "gpt-3.5-turbo"]
+                model_options = ["gpt-4o", "gpt-4o-mini"]
                 default_model = "gpt-4o-mini"
             else:
-                model_options = ["gemini-2.0-flash-exp", "gemini-1.5-pro", "gemini-1.5-flash"]
-                default_model = "gemini-2.0-flash-exp"
+                model_options = ["gemini-2.5-flash-lite"]
+                default_model = "gemini-2.5-flash-lite"
             
             model_name = st.selectbox(
                 "모델 선택",
@@ -150,14 +150,36 @@ def main():
                 key="qa_model"
             )
             
-            # API 키 입력
-            api_key = st.text_input(
-                f"{provider} API 키",
-                type="password",
-                placeholder=f"{'sk-...' if provider == 'OpenAI' else 'AI...'} 형식의 API 키를 입력하세요",
-                help=f"{'https://platform.openai.com/api-keys' if provider == 'OpenAI' else 'https://aistudio.google.com/app/apikey'}에서 발급받으세요",
-                key="qa_api_key"
-            )
+            # API 키 처리 (Secrets 우선 확인)
+            secret_key_mapping = {
+                "OpenAI": "openai_api_key",
+                "Gemini": "gemini_api_key"
+            }
+            target_secret = secret_key_mapping.get(provider)
+            
+            api_key = None
+            is_secret_loaded = False
+
+            # 1. Secrets에서 키 확인
+            if target_secret in st.secrets:
+                api_key = st.secrets[target_secret]
+                is_secret_loaded = True
+                st.success(f"🔐 {provider} API Key가 secrets.toml에서 로드되었습니다.")
+                # 세션 상태에 저장 (다른 컴포넌트에서 사용)
+                st.session_state['qa_api_key'] = api_key
+            
+            # 2. Secrets에 없으면 사용자 입력 받기
+            if not is_secret_loaded:
+                api_key_input = st.text_input(
+                    f"{provider} API 키",
+                    type="password",
+                    placeholder=f"{'sk-...' if provider == 'OpenAI' else 'AI...'} 형식의 API 키를 입력하세요",
+                    help=f"{'https://platform.openai.com/api-keys' if provider == 'OpenAI' else 'https://aistudio.google.com/app/apikey'}에서 발급받으세요",
+                    key="qa_api_key_input"
+                )
+                if api_key_input:
+                    api_key = api_key_input
+                    st.session_state['qa_api_key'] = api_key
             
             # 설정 완료 버튼
             if st.button("✅ 설정 완료", use_container_width=True):
