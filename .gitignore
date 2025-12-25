@@ -1,0 +1,118 @@
+# ========================================
+# CRITICAL: Secrets and Sensitive Data
+# ========================================
+.streamlit/secrets.toml
+.streamlit/secrets.*.toml
+*.env
+.env
+.env.*
+secrets/
+config/secrets/
+
+# ========================================
+# Python
+# ========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ========================================
+# Data and Index Files (Large/Generated)
+# ========================================
+# index_output/  ← 주석 처리: 사전 빌드된 인덱스를 GitHub에 포함
+# *.pkl          ← 주석 처리: BM25 인덱스 포함
+# *.faiss        ← 주석 처리: FAISS 인덱스 포함
+# *.json         ← 주석 처리: 메타데이터 포함
+data/*.txt       # 실제 문서는 여전히 제외
+data/*.md        # 실제 문서는 여전히 제외
+!data/README.md  # README는 포함
+*.db
+*.sqlite
+*.sqlite3
+
+# ========================================
+# IDEs and Editors
+# ========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# ========================================
+# OS Files
+# ========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ========================================
+# Docker
+# ========================================
+.dockerignore
+docker-compose.override.yml
+
+# ========================================
+# Logs and Temporary Files
+# ========================================
+*.log
+logs/
+*.tmp
+*.temp
+.cache/
+
+# ========================================
+# Jupyter Notebooks
+# ========================================
+.ipynb_checkpoints/
+*.ipynb
+
+# ========================================
+# Testing
+# ========================================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# ========================================
+# Documentation Build
+# ========================================
+docs/_build/
+site/

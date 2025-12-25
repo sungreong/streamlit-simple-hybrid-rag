@@ -1,0 +1,12 @@
+services:
+  streamlit-app:
+    build: .
+    container_name: streamlit_search_guide
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+      - ./.streamlit:/app/.streamlit
+    environment:
+      - STREAMLIT_SERVER_HEADLESS=true
+    restart: unless-stopped
