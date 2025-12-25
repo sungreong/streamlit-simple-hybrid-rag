@@ -68,6 +68,28 @@ def save_history(history):
     except Exception as e:
         print(f"Error saving history: {e}")
 
+# --- QA Cache Persistence ---
+QA_CACHE_FILE = "qa_cache.json"
+
+def load_qa_cache():
+    """QA 캐시를 파일에서 로드합니다."""
+    if os.path.exists(QA_CACHE_FILE):
+        try:
+            with open(QA_CACHE_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Error loading QA cache: {e}")
+            return {}
+    return {}
+
+def save_qa_cache(cache):
+    """QA 캐시를 파일에 저장합니다."""
+    try:
+        with open(QA_CACHE_FILE, "w", encoding="utf-8") as f:
+            json.dump(cache, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"Error saving QA cache: {e}")
+
 # --- Main App ---
 def main():
     index_dir = "./index_output"
@@ -88,6 +110,10 @@ def main():
     # Session State 초기화 (가장 먼저 실행)
     if 'qa_history' not in st.session_state:
         st.session_state['qa_history'] = load_history()
+    
+    # QA Cache 로드
+    if 'qa_cache' not in st.session_state:
+        st.session_state['qa_cache'] = load_qa_cache()
     
     # Sidebar (searcher 로드 후)
     with st.sidebar:
@@ -449,7 +475,19 @@ def main():
                     if not results or results[0]['score'] < 0.1:
                         st.warning("😕 관련된 문서를 찾지 못했습니다. 다른 질문으로 시도해보세요.")
                     else:
-                        answer, error = get_ai_answer(question, results, current_provider, current_api_key, current_model)
+                        # 캐시 확인
+                        cache_key = question.strip()
+                        if cache_key in st.session_state['qa_cache']:
+                            answer = st.session_state['qa_cache'][cache_key]
+                            error = None
+                            st.info("⚡ 이전에 답변한 내용입니다 (캐시됨)")
+                        else:
+                            answer, error = get_ai_answer(question, results, current_provider, current_api_key, current_model)
+                            
+                            # 새 답변 캐시에 저장
+                            if answer and not error:
+                                st.session_state['qa_cache'][cache_key] = answer
+                                save_qa_cache(st.session_state['qa_cache'])
                         
                         if error:
                             st.error(error)
