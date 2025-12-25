@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import json
 import re
 import markdown
 import pandas as pd
@@ -121,11 +122,61 @@ def main():
         show_logout_button()
         
         st.markdown("---")
+        
+        # 설정 영역 (사이드바로 이동)
+        with st.expander("⚙️ AI 설정", expanded=not st.session_state.get('qa_configured', False)):
+            st.caption("AI 제공자와 API 키를 설정하세요")
+            
+            # AI 제공자 및 모델 선택
+            provider = st.selectbox(
+                "AI 제공자",
+                ["OpenAI", "Gemini"],
+                help="사용할 AI 서비스를 선택하세요",
+                key="qa_provider"
+            )
+            
+            if provider == "OpenAI":
+                model_options = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "gpt-3.5-turbo"]
+                default_model = "gpt-4o-mini"
+            else:
+                model_options = ["gemini-2.0-flash-exp", "gemini-1.5-pro", "gemini-1.5-flash"]
+                default_model = "gemini-2.0-flash-exp"
+            
+            model_name = st.selectbox(
+                "모델 선택",
+                model_options,
+                index=model_options.index(default_model),
+                help="사용할 AI 모델을 선택하세요",
+                key="qa_model"
+            )
+            
+            # API 키 입력
+            api_key = st.text_input(
+                f"{provider} API 키",
+                type="password",
+                placeholder=f"{'sk-...' if provider == 'OpenAI' else 'AI...'} 형식의 API 키를 입력하세요",
+                help=f"{'https://platform.openai.com/api-keys' if provider == 'OpenAI' else 'https://aistudio.google.com/app/apikey'}에서 발급받으세요",
+                key="qa_api_key"
+            )
+            
+            # 설정 완료 버튼
+            if st.button("✅ 설정 완료", use_container_width=True):
+                if api_key:
+                    st.session_state['qa_configured'] = True
+                    st.success("설정 완료!")
+                    st.rerun()
+                else:
+                    st.error("API 키를 입력해주세요.")
+        
+        # 설정 상태 표시
+        if st.session_state.get('qa_configured', False):
+            st.success(f"✅ 연동됨: {st.session_state.get('qa_provider')} - {st.session_state.get('qa_model')}")
+
+        st.markdown("---")
         st.caption(f"📂 총 {len(searcher.doc_map)}개 문서")
         
         # --- History Sidebar Section ---
         if st.session_state['qa_history']:
-            st.markdown("---")
             with st.expander(f"📜 최근 질문 ({len(st.session_state['qa_history'])}개)", expanded=True):
                 # 질문 이력 Excel 다운로드
                 df_history = pd.DataFrame({
@@ -378,58 +429,11 @@ def main():
         else:
             initial_question = ""
         
-        # 설정 영역 (접을 수 있음)
-        with st.expander("⚙️ AI 설정", expanded=not st.session_state.get('qa_configured', False)):
-            st.caption("AI 제공자와 API 키를 설정하세요")
-            
-            # AI 제공자 및 모델 선택
-            col1, col2 = st.columns(2)
-            
-            with col1:
-                provider = st.selectbox(
-                    "AI 제공자",
-                    ["OpenAI", "Gemini"],
-                    help="사용할 AI 서비스를 선택하세요",
-                    key="qa_provider"
-                )
-            
-            with col2:
-                if provider == "OpenAI":
-                    model_options = ["gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "gpt-3.5-turbo"]
-                    default_model = "gpt-4o-mini"
-                else:
-                    model_options = ["gemini-2.0-flash-exp", "gemini-1.5-pro", "gemini-1.5-flash"]
-                    default_model = "gemini-2.0-flash-exp"
-                
-                model_name = st.selectbox(
-                    "모델 선택",
-                    model_options,
-                    index=model_options.index(default_model),
-                    help="사용할 AI 모델을 선택하세요",
-                    key="qa_model"
-                )
-            
-            # API 키 입력
-            api_key = st.text_input(
-                f"{provider} API 키",
-                type="password",
-                placeholder=f"{'sk-...' if provider == 'OpenAI' else 'AI...'} 형식의 API 키를 입력하세요",
-                help=f"{'https://platform.openai.com/api-keys' if provider == 'OpenAI' else 'https://aistudio.google.com/app/apikey'}에서 발급받으세요",
-                key="qa_api_key"
-            )
-            
-            # 설정 완료 버튼
-            if st.button("✅ 설정 완료", use_container_width=True):
-                if api_key:
-                    st.session_state['qa_configured'] = True
-                    st.success("설정이 완료되었습니다!")
-                    st.rerun()
-                else:
-                    st.error("API 키를 입력해주세요.")
-        
         # 설정 상태 표시
         if st.session_state.get('qa_configured', False):
             st.success(f"✅ 설정 완료: {st.session_state.get('qa_provider', 'OpenAI')} - {st.session_state.get('qa_model', 'gpt-4o-mini')}")
+        else:
+            st.info("👈 왼쪽 사이드바에서 'AI 설정'을 먼저 완료해주세요.")
         
         # 질문 입력 (더 큰 영역)
         question = st.text_area(
@@ -461,13 +465,17 @@ def main():
             elif not question:
                 st.warning("질문을 입력해주세요.")
             else:
-                # 질문 이력에 추가 (중복 제거)
                 if question not in st.session_state['qa_history']:
                     st.session_state['qa_history'].append(question)
                     # 최대 20개까지만 저장
                     if len(st.session_state['qa_history']) > 20:
                         st.session_state['qa_history'].pop(0)
                     save_history(st.session_state['qa_history'])  # 파일에 저장
+                else:
+                    # 이미 있으면 최신으로 갱신
+                    st.session_state['qa_history'].remove(question)
+                    st.session_state['qa_history'].append(question)
+                    save_history(st.session_state['qa_history'])
                 
                 with st.spinner("🤔 AI가 답변을 생성하는 중..."):
                     results = searcher.search(question, top_k=3)
@@ -477,35 +485,100 @@ def main():
                     else:
                         # 캐시 확인
                         cache_key = question.strip()
+                        answer_data = None
+                        error = None
+                        is_cached = False
+                        
                         if cache_key in st.session_state['qa_cache']:
-                            answer = st.session_state['qa_cache'][cache_key]
-                            error = None
-                            st.info("⚡ 이전에 답변한 내용입니다 (캐시됨)")
+                            cached_val = st.session_state['qa_cache'][cache_key]
+                            # 캐시 하위 호환성 (문자열 -> 딕셔너리 변환)
+                            if isinstance(cached_val, str):
+                                answer_data = {"answer": cached_val, "references": []}
+                            else:
+                                answer_data = cached_val
+                            is_cached = True
                         else:
-                            answer, error = get_ai_answer(question, results, current_provider, current_api_key, current_model)
+                            answer_data, error = get_ai_answer(question, results, current_provider, current_api_key, current_model)
                             
                             # 새 답변 캐시에 저장
-                            if answer and not error:
-                                st.session_state['qa_cache'][cache_key] = answer
+                            if answer_data and not error:
+                                st.session_state['qa_cache'][cache_key] = answer_data
                                 save_qa_cache(st.session_state['qa_cache'])
                         
                         if error:
                             st.error(error)
-                        elif answer:
-                            # 답변 표시
-                            st.markdown(f"""
-                            <div class="answer-box">
-                                <h3>🤖 AI 답변 ({current_provider} - {current_model})</h3>
-                                <div class="answer-content">{answer}</div>
-                            </div>
-                            """, unsafe_allow_html=True)
+                        elif answer_data:
+                            if is_cached:
+                                st.info("⚡ 이전에 답변한 내용입니다 (캐시됨)")
+                                
+                            # 2단 레이아웃: [왼쪽] 답변 / [오른쪽] 출처
+                            col_ans, col_ref = st.columns([1, 1])
                             
-                            # 참고 문서 표시
-                            with st.expander("📚 참고한 문서 보기"):
-                                for i, doc in enumerate(results):
-                                    st.markdown(f"**[문서 {i+1}] {doc['doc_id']}**")
-                                    st.text(doc['text'][:200] + "...")
-                                    st.markdown("---")
+                            # [왼쪽] AI 답변
+                            with col_ans:
+                                st.markdown(f"""
+                                <div class="answer-box">
+                                    <h3>🤖 AI 답변 ({current_provider})</h3>
+                                    <div class="answer-content">{answer_data['answer']}</div>
+                                </div>
+                                """, unsafe_allow_html=True)
+
+                            # [오른쪽] 출처 (참고한 문서만 필터링)
+                            with col_ref:
+                                st.markdown("### 📚 참고한 문서")
+                                
+                                # 참조된 chunk_id 목록
+                                ref_ids = answer_data.get('references', [])
+                                
+                                # 결과 최적화
+                                results_map = {r['chunk_id']: r for r in results}
+                                
+                                # 결과 분류 (A: 핵심 인용만 표시)
+                                relevant_docs = [results_map[rid] for rid in ref_ids if rid in results_map]
+                                
+                                # 사용자의 요청에 따라 AI가 인용한 문서만 표시하고, 나머지는 숨김
+                                display_docs = relevant_docs
+                                
+                                # 만약 인용된 문서가 하나도 없다면? (AI가 출처를 못 찾은 경우)
+                                if not display_docs and results:
+                                    # 이 경우에만 검색 결과 상위 3개를 보여줄지, 아니면 아예 안 보여줄지 결정해야 함.
+                                    # 사용자의 "이력에도 사용하지 마"라는 말에 따르면 아예 안 보여주는 게 맞을 수도 있으나,
+                                    # 답변이 "없습니다"가 아닌 경우엔 출처가 누락된 것일 수 있음.
+                                    # 일단은 안전하게 인용된 게 없으면 검색 결과 상위 3개는 참고용으로 노출하되 구분감 있게 표시하거나
+                                    # 혹은 아예 숨김.
+                                    # 사용자 의도: "나머지는... 이력에도 사용하지 마" -> 인용된 것만 남겨라.
+                                    pass 
+                                
+                                # 스크롤 가능한 컨테이너
+                                with st.container(height=500):
+                                    if not display_docs:
+                                        st.caption("참고할 만한 명확한 출처가 없습니다.")
+                                    
+                                    for i, doc in enumerate(display_docs):
+                                        # 인용 여부에 따른 스타일
+                                        is_cited = doc['chunk_id'] in ref_ids
+                                        
+                                        # 아이콘 및 라벨 설정
+                                        icon = "🎯" if is_cited else "⭐"
+                                        label_prefix = "핵심 출처" if is_cited else "관련 문서"
+                                        expander_label = f"{icon} [{label_prefix}] {doc['doc_id']} ({doc['chunk_id']})"
+                                        
+                                        # Expander를 사용하여 탭 이동/리런 없이 즉시 내용 표시
+                                        with st.expander(expander_label, expanded=is_cited): # 핵심 출처는 기본적으로 펼침
+                                            # 메타 정보 표시
+                                            st.caption(f"**Score:** {doc['score']:.4f} | **Chunk:** {doc['chunk_id']}")
+                                            
+                                            # 문서 내용
+                                            if doc['doc_id'].lower().endswith('.md'):
+                                                # 폰트 크기 명시적 조절 (CSS 클래스 활용)
+                                                content_html = render_markdown(doc['text'])
+                                                st.markdown(f'<div class="small-doc-content">{content_html}</div>', unsafe_allow_html=True)
+                                            else:
+                                                st.markdown(f'<div class="small-doc-content">{doc["text"]}</div>', unsafe_allow_html=True)
+                                            
+                                            st.markdown("---")
+                                            # 전체 문맥(앞뒤 내용)이 필요할 수 있으므로 안내
+                                            st.info("💡 전체 맥락은 '문서 검색' 탭에서 확인할 수 있습니다.")
 
 if __name__ == "__main__":
     main()

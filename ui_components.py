@@ -57,7 +57,7 @@ APP_STYLES = """
     }
     
     .doc-content {
-        font-size: 1rem;
+        font-size: 0.9rem;
         line-height: 1.6;
         color: #1f2937;
     }
@@ -90,6 +90,7 @@ APP_STYLES = """
         border-radius: 8px;
         margin-top: 10px;
         line-height: 1.8;
+        font-size: 0.95rem;
     }
     
     .doc-viewer {
@@ -100,12 +101,12 @@ APP_STYLES = """
         max-height: 70vh;
         overflow-y: auto;
         line-height: 1.6;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
     
     .doc-viewer h1 {
         color: #1e3a8a;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-weight: 700;
         border-bottom: 2px solid #e5e7eb;
         padding-bottom: 8px;
@@ -115,7 +116,7 @@ APP_STYLES = """
     
     .doc-viewer h2 {
         color: #1e40af;
-        font-size: 1.2rem;
+        font-size: 1.15rem;
         font-weight: 600;
         margin-top: 16px;
         margin-bottom: 10px;
@@ -123,7 +124,7 @@ APP_STYLES = """
     
     .doc-viewer h3 {
         color: #3b82f6;
-        font-size: 1.05rem;
+        font-size: 1.0rem;
         font-weight: 600;
         margin-top: 12px;
         margin-bottom: 8px;
@@ -213,6 +214,32 @@ APP_STYLES = """
     .search-input {
         font-size: 1.1rem !important;
     }
+
+    /* Q&A 참조 문서용 - 전체 요소 강제 축소 */
+    .small-doc-content {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+    }
+    
+    .small-doc-content * {
+        font-size: inherit !important; 
+        line-height: inherit !important;
+    }
+
+    /* 제목은 본문보다 아주 살짝만 크게 */
+    .small-doc-content h1 { font-size: 1.1em !important; margin: 8px 0 4px 0 !important; font-weight: 700 !important; }
+    .small-doc-content h2 { font-size: 1.05em !important; margin: 6px 0 3px 0 !important; font-weight: 600 !important; }
+    .small-doc-content h3 { font-size: 1.0em !important; margin: 5px 0 2px 0 !important; font-weight: 600 !important; }
+    
+    /* 여백 및 패딩 축소 */
+    .small-doc-content p { margin: 3px 0 !important; }
+    .small-doc-content ul, .small-doc-content ol { padding-left: 18px !important; margin: 3px 0 !important; }
+    .small-doc-content li { margin: 1px 0 !important; }
+    .small-doc-content blockquote { margin: 5px 0 !important; padding-left: 10px !important; font-size: 0.9em !important; }
+    .small-doc-content pre { padding: 8px !important; margin: 5px 0 !important; }
+    .small-doc-content code { font-size: 0.9em !important; }
+    .small-doc-content table { margin: 5px 0 !important; font-size: 0.9em !important; }
+    .small-doc-content th, .small-doc-content td { padding: 4px 8px !important; }
     </style>
 """
 
