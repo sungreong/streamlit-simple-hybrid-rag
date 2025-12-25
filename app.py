@@ -46,6 +46,28 @@ def highlight_text(text, query):
         flags=re.IGNORECASE
     )
 
+# --- History Persistence ---
+HISTORY_FILE = "search_history.json"
+
+def load_history():
+    """질문 이력을 파일에서 로드합니다."""
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Error loading history: {e}")
+            return []
+    return []
+
+def save_history(history):
+    """질문 이력을 파일에 저장합니다."""
+    try:
+        with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+            json.dump(history, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"Error saving history: {e}")
+
 # --- Main App ---
 def main():
     index_dir = "./index_output"
@@ -63,6 +85,10 @@ def main():
     
     searcher = get_searcher()
     
+    # Session State 초기화 (가장 먼저 실행)
+    if 'qa_history' not in st.session_state:
+        st.session_state['qa_history'] = load_history()
+    
     # Sidebar (searcher 로드 후)
     with st.sidebar:
         st.title("📚 문서 검색")
@@ -70,6 +96,71 @@ def main():
         
         st.markdown("---")
         st.caption(f"📂 총 {len(searcher.doc_map)}개 문서")
+        
+        # --- History Sidebar Section ---
+        if st.session_state['qa_history']:
+            st.markdown("---")
+            with st.expander(f"📜 최근 질문 ({len(st.session_state['qa_history'])}개)", expanded=True):
+                # 질문 이력 Excel 다운로드
+                df_history = pd.DataFrame({
+                    '번호': range(1, len(st.session_state['qa_history']) + 1),
+                    '질문': st.session_state['qa_history']
+                })
+                
+                buffer_hist = BytesIO()
+                with pd.ExcelWriter(buffer_hist, engine='openpyxl') as writer:
+                    df_history.to_excel(writer, index=False, sheet_name='질문이력')
+                
+                st.download_button(
+                    label="📥 전체 이력 다운로드",
+                    data=buffer_hist.getvalue(),
+                    file_name=f"질문이력_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    help="질문 이력을 Excel로 다운로드",
+                    use_container_width=True
+                )
+                
+                # 전체 삭제 버튼 (확인 절차 포함)
+                if st.button("🗑️ 전체 삭제", use_container_width=True, type="secondary"):
+                    st.session_state['confirm_delete_history'] = True
+                    st.rerun()
+
+                # 삭제 확인
+                if st.session_state.get('confirm_delete_history', False):
+                    st.warning("⚠️ 모두 삭제하시겠습니까?")
+                    col_confirm1, col_confirm2 = st.columns(2)
+                    with col_confirm1:
+                        if st.button("✅ 예", use_container_width=True, type="primary"):
+                            st.session_state['qa_history'] = []
+                            save_history([]) # 파일 초기화
+                            st.session_state['confirm_delete_history'] = False
+                            st.success("삭제됨")
+                            st.rerun()
+                    with col_confirm2:
+                        if st.button("❌ 아니오", use_container_width=True):
+                            st.session_state['confirm_delete_history'] = False
+                            st.rerun()
+                
+                st.markdown("---")
+                
+                # 이력 리스트 표시 (역순)
+                for idx, hist_q in enumerate(reversed(st.session_state['qa_history'][-10:])): # 최근 10개
+                    col_hist, col_del = st.columns([4, 1])
+                    with col_hist:
+                        # 텍스트가 너무 길면 자름
+                        btn_label = f"{hist_q[:15]}..." if len(hist_q) > 15 else hist_q
+                        if st.button(f"💬 {btn_label}", key=f"hist_btn_{idx}", help=hist_q, use_container_width=True):
+                            # 클릭 시 검색창(Tab1)과 질문창(Tab2) 모두 업데이트
+                            st.session_state['search_input'] = hist_q
+                            st.session_state['qa_question'] = hist_q
+                            st.rerun()
+                    with col_del:
+                        if st.button("🗑️", key=f"hist_del_{idx}"):
+                            # 역순이므로 원래 인덱스 계산 필요
+                            original_idx = len(st.session_state['qa_history']) - 1 - idx
+                            st.session_state['qa_history'].pop(original_idx)
+                            save_history(st.session_state['qa_history'])
+                            st.rerun()
 
     # Main UI
     st.title("🔍 문서 검색 & 질문")
@@ -90,6 +181,14 @@ def main():
         if query:
             with st.spinner("🔍 검색 중..."):
                 results = searcher.search(query, top_k=5)
+            
+            # 검색어도 이력에 저장 (결과가 있을 때만)
+            if results and results[0]['score'] >= 0.1:
+                if query not in st.session_state['qa_history']:
+                    st.session_state['qa_history'].append(query)
+                    if len(st.session_state['qa_history']) > 20:
+                        st.session_state['qa_history'].pop(0)
+                    save_history(st.session_state['qa_history'])
             
             if not results or results[0]['score'] < 0.1:
                 st.warning("😕 관련된 문서를 찾지 못했습니다. 다른 검색어로 시도해보세요.")
@@ -188,8 +287,9 @@ def main():
                         doc_content_html = ""
                         for c in all_chunks:
                             is_hit = c['chunk_id'] == selected_chunk_id
-                            # 청크 ID를 HTML id 속성으로 사용 (특수문자 처리)
-                            html_id = f"chunk_{c['index']}"
+                            # 청크 ID를 HTML id 속성으로 사용
+                            chunk_idx = c['metadata']['index']
+                            html_id = f"chunk_{chunk_idx}"
                             
                             if is_markdown:
                                 rendered_content = render_markdown(c["text"])
@@ -207,15 +307,28 @@ def main():
                         # 스크롤 자동 이동 스크립트
                         # 선택된 청크의 인덱스를 찾아서 해당 ID로 스크롤
                         if selected_chunk_id:
-                            target_index = next((c['index'] for c in all_chunks if c['chunk_id'] == selected_chunk_id), None)
+                            target_index = next((c['metadata']['index'] for c in all_chunks if c['chunk_id'] == selected_chunk_id), None)
                             if target_index is not None:
                                 scroll_script = f"""
                                     <script>
-                                        // 약간의 지연 후 스크롤 실행 (DOM 렌더링 확보)
+                                        // Streamlit components run in an iframe, so we need to access the parent document
                                         setTimeout(function() {{
-                                            const element = document.getElementById("chunk_{target_index}");
-                                            if (element) {{
-                                                element.scrollIntoView({{ behavior: "smooth", block: "center" }});
+                                            try {{
+                                                const element = window.parent.document.getElementById("chunk_{target_index}");
+                                                if (element) {{
+                                                    element.scrollIntoView({{ behavior: "smooth", block: "center" }});
+                                                    // 시각적 피드백을 위해 잠시 깜빡임 효과 (선택 사항)
+                                                    element.style.transition = "background-color 0.5s";
+                                                    const originalBg = element.style.backgroundColor;
+                                                    element.style.backgroundColor = "#fff9c4"; // 노란색 하이라이트
+                                                    setTimeout(() => {{
+                                                        element.style.backgroundColor = originalBg;
+                                                    }}, 1500);
+                                                }} else {{
+                                                    console.log("Chunk element not found: chunk_{target_index}");
+                                                }}
+                                            }} catch (e) {{
+                                                console.error("Scroll script error:", e);
                                             }}
                                         }}, 500);
                                     </script>
@@ -231,77 +344,13 @@ def main():
     with tab2:
         st.markdown("### 💬 AI에게 질문하기")
         
-        # 질문 이력 초기화
-        if 'qa_history' not in st.session_state:
-            st.session_state['qa_history'] = []
-        
         # 검색 탭에서 검색어 가져오기
-        if 'search_input' in st.session_state and st.session_state.search_input:
+        if 'qa_question' in st.session_state and st.session_state.qa_question:
+            initial_question = st.session_state.qa_question
+        elif 'search_input' in st.session_state and st.session_state.search_input:
             initial_question = st.session_state.search_input
         else:
             initial_question = ""
-        
-        # 질문 이력 표시 (사이드바)
-        if st.session_state['qa_history']:
-            with st.expander(f"📜 최근 질문 ({len(st.session_state['qa_history'])}개)", expanded=False):
-                col_caption, col_export = st.columns([3, 1])
-                with col_caption:
-                    st.caption("이전 질문을 클릭하면 다시 사용할 수 있습니다")
-                with col_export:
-                    # 질문 이력 Excel 다운로드
-                    df_history = pd.DataFrame({
-                        '번호': range(1, len(st.session_state['qa_history']) + 1),
-                        '질문': st.session_state['qa_history']
-                    })
-                    
-                    buffer_hist = BytesIO()
-                    with pd.ExcelWriter(buffer_hist, engine='openpyxl') as writer:
-                        df_history.to_excel(writer, index=False, sheet_name='질문이력')
-                    
-                    st.download_button(
-                        label="📥",
-                        data=buffer_hist.getvalue(),
-                        file_name=f"질문이력_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
-                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        help="질문 이력을 Excel로 다운로드",
-                        use_container_width=True
-                    )
-                
-                for idx, hist_q in enumerate(reversed(st.session_state['qa_history'][-5:])):  # 최근 5개만
-                    col1, col2 = st.columns([5, 1])
-                    with col1:
-                        if st.button(f"💬 {hist_q[:50]}{'...' if len(hist_q) > 50 else ''}", 
-                                   key=f"hist_{idx}", 
-                                   use_container_width=True):
-                            st.session_state['qa_question'] = hist_q
-                            st.rerun()
-                    with col2:
-                        if st.button("🗑️", key=f"del_{idx}", help="삭제"):
-                            st.session_state['qa_history'].remove(hist_q)
-                            st.rerun()
-                
-                # 전체 삭제 버튼 (확인 절차 포함)
-                st.markdown("---")
-                col_del1, col_del2 = st.columns(2)
-                with col_del1:
-                    if st.button("🗑️ 전체 삭제", use_container_width=True, type="secondary"):
-                        st.session_state['confirm_delete_history'] = True
-                        st.rerun()
-                
-                # 삭제 확인
-                if st.session_state.get('confirm_delete_history', False):
-                    st.warning(f"⚠️ 정말로 {len(st.session_state['qa_history'])}개의 질문 이력을 모두 삭제하시겠습니까?")
-                    col_confirm1, col_confirm2 = st.columns(2)
-                    with col_confirm1:
-                        if st.button("✅ 예, 삭제합니다", use_container_width=True, type="primary"):
-                            st.session_state['qa_history'] = []
-                            st.session_state['confirm_delete_history'] = False
-                            st.success("질문 이력이 모두 삭제되었습니다.")
-                            st.rerun()
-                    with col_confirm2:
-                        if st.button("❌ 취소", use_container_width=True):
-                            st.session_state['confirm_delete_history'] = False
-                            st.rerun()
         
         # 설정 영역 (접을 수 있음)
         with st.expander("⚙️ AI 설정", expanded=not st.session_state.get('qa_configured', False)):
@@ -392,6 +441,7 @@ def main():
                     # 최대 20개까지만 저장
                     if len(st.session_state['qa_history']) > 20:
                         st.session_state['qa_history'].pop(0)
+                    save_history(st.session_state['qa_history'])  # 파일에 저장
                 
                 with st.spinner("🤔 AI가 답변을 생성하는 중..."):
                     results = searcher.search(question, top_k=3)

@@ -1,377 +1,312 @@
 [
   {
-    "doc_id": "README.md",
-    "chunk_id": "README.md::chunk::0",
-    "text": "# Sample Data Directory\n이 디렉토리는 테스트용 샘플 문서를 저장하는 곳입니다.",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::0",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n본 문서는 백돈 전 메뉴에 대한 내부 기준 문서이다.  \n모든 메뉴는 중량, 구성, 소스, 조리 시간, 옵션, 예외 사항을 포함한다.  \n손님 노출용이 아닌 **운영·교육·인수인계 전용 문서**이다.\n---",
     "metadata": {
-      "source": "./data/README.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 0,
-      "total_chunks": 3,
+      "total_chunks": 24,
       "prev_chunk_id": null,
-      "next_chunk_id": "README.md::chunk::1",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::1",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "README.md",
-    "chunk_id": "README.md::chunk::1",
-    "text": "# Sample Data Directory\n## 사용 방법\n1. `.txt` 또는 `.md` 파일을 이 폴더에 추가하세요.\n2. `vectorize.py`를 실행하여 인덱싱하세요.\n3. Streamlit 앱에서 검색을 시작하세요.",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::1",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 돈카츠류",
     "metadata": {
-      "source": "./data/README.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 1,
-      "total_chunks": 3,
-      "prev_chunk_id": "README.md::chunk::0",
-      "next_chunk_id": "README.md::chunk::2",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::0",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::2",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "README.md",
-    "chunk_id": "README.md::chunk::2",
-    "text": "# Sample Data Directory\n## 주의사항\n⚠️ 실제 데이터 파일은 `.gitignore`에 의해 Git에 추적되지 않습니다.\n⚠️ 민감한 정보가 포함된 문서는 절대 업로드하지 마세요.",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::2",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 돈카츠류\n### 백돈 숙성 등심 돈카츠\n- 부위: 등심\n- 두께: 23mm\n- 중량: 180g\n- 제공 단위: 최대 2덩어리\n- 소스\n  - 기본 돈까스 소스\n  - 3구 소스\n- 국물: 장국\n---",
     "metadata": {
-      "source": "./data/README.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 2,
-      "total_chunks": 3,
-      "prev_chunk_id": "README.md::chunk::1",
-      "next_chunk_id": null,
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::1",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::3",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "sample1.txt",
-    "chunk_id": "sample1.txt::chunk::0",
-    "text": "한글 문서 검색 시스템은 현대 정보 검색의 핵심입니다.",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::3",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 돈카츠류\n### 백돈 숙성 안심 돈카츠\n- 부위: 안심\n- 수량: 3개\n- 총 중량: 180g\n- 소스\n  - 기본 돈까스 소스\n  - 3구 소스\n- 국물: 장국\n---",
     "metadata": {
-      "source": "./data/sample1.txt",
-      "index": 0,
-      "total_chunks": 5,
-      "prev_chunk_id": null,
-      "next_chunk_id": "sample1.txt::chunk::1",
-      "chunking_strategy": "simple"
-    }
-  },
-  {
-    "doc_id": "sample1.txt",
-    "chunk_id": "sample1.txt::chunk::1",
-    "text": "특히 BM25는 키워드 기반 검색에서 매우 강력한 성능을 발휘합니다.",
-    "metadata": {
-      "source": "./data/sample1.txt",
-      "index": 1,
-      "total_chunks": 5,
-      "prev_chunk_id": "sample1.txt::chunk::0",
-      "next_chunk_id": "sample1.txt::chunk::2",
-      "chunking_strategy": "simple"
-    }
-  },
-  {
-    "doc_id": "sample1.txt",
-    "chunk_id": "sample1.txt::chunk::2",
-    "text": "TF-IDF의 단점을 보완하여 문서의 길이에 따른 가중치를 조절할 수 있습니다.",
-    "metadata": {
-      "source": "./data/sample1.txt",
-      "index": 2,
-      "total_chunks": 5,
-      "prev_chunk_id": "sample1.txt::chunk::1",
-      "next_chunk_id": "sample1.txt::chunk::3",
-      "chunking_strategy": "simple"
-    }
-  },
-  {
-    "doc_id": "sample1.txt",
-    "chunk_id": "sample1.txt::chunk::3",
-    "text": "한글의 경우 형태소 분석기(Kiwi 등)를 사용하여 의미 있는 토큰을 추출하는 것이 중요합니다.",
-    "metadata": {
-      "source": "./data/sample1.txt",
+      "source": "./data/백돈_메뉴판.md",
       "index": 3,
-      "total_chunks": 5,
-      "prev_chunk_id": "sample1.txt::chunk::2",
-      "next_chunk_id": "sample1.txt::chunk::4",
-      "chunking_strategy": "simple"
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::2",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::4",
+      "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "sample1.txt",
-    "chunk_id": "sample1.txt::chunk::4",
-    "text": "명사와 동사를 위주로 분석하면 검색 정확도가 크게 향상됩니다.",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::4",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 돈카츠류\n### 백돈 모듬 돈카츠 (노컷팅 제공)\n- 구성\n  - 안심 1개 (60g)\n  - 등심 1개 (60g)\n  - 치즈 카츠 1개\n- 컷팅: 노컷팅 기본\n- 소스\n  - 기본 돈까스 소스\n  - 3구 소스\n- 국물: 장국\n---",
     "metadata": {
-      "source": "./data/sample1.txt",
+      "source": "./data/백돈_메뉴판.md",
       "index": 4,
-      "total_chunks": 5,
-      "prev_chunk_id": "sample1.txt::chunk::3",
-      "next_chunk_id": null,
-      "chunking_strategy": "simple"
-    }
-  },
-  {
-    "doc_id": "sample2.txt",
-    "chunk_id": "sample2.txt::chunk::0",
-    "text": "Semantic 검색은 단어의 표면적인 일치뿐만 아니라 의미적 유사성을 파악합니다.",
-    "metadata": {
-      "source": "./data/sample2.txt",
-      "index": 0,
-      "total_chunks": 5,
-      "prev_chunk_id": null,
-      "next_chunk_id": "sample2.txt::chunk::1",
-      "chunking_strategy": "simple"
-    }
-  },
-  {
-    "doc_id": "sample2.txt",
-    "chunk_id": "sample2.txt::chunk::1",
-    "text": "Sentence Transformers와 같은 임베딩 모델을 사용하면 문장을 고차원 벡터로 변환할 수 있습니다.",
-    "metadata": {
-      "source": "./data/sample2.txt",
-      "index": 1,
-      "total_chunks": 5,
-      "prev_chunk_id": "sample2.txt::chunk::0",
-      "next_chunk_id": "sample2.txt::chunk::2",
-      "chunking_strategy": "simple"
-    }
-  },
-  {
-    "doc_id": "sample2.txt",
-    "chunk_id": "sample2.txt::chunk::2",
-    "text": "이렇게 변환된 벡터는 FAISS와 같은 라이브러리를 통해 빠르게 검색이 가능합니다.",
-    "metadata": {
-      "source": "./data/sample2.txt",
-      "index": 2,
-      "total_chunks": 5,
-      "prev_chunk_id": "sample2.txt::chunk::1",
-      "next_chunk_id": "sample2.txt::chunk::3",
-      "chunking_strategy": "simple"
-    }
-  },
-  {
-    "doc_id": "sample2.txt",
-    "chunk_id": "sample2.txt::chunk::3",
-    "text": "벡터 검색은 질문의 의도를 파악하는 데 유리하며, 하이브리드 검색은 이를 BM25와 결합합니다.",
-    "metadata": {
-      "source": "./data/sample2.txt",
-      "index": 3,
-      "total_chunks": 5,
-      "prev_chunk_id": "sample2.txt::chunk::2",
-      "next_chunk_id": "sample2.txt::chunk::4",
-      "chunking_strategy": "simple"
-    }
-  },
-  {
-    "doc_id": "sample2.txt",
-    "chunk_id": "sample2.txt::chunk::4",
-    "text": "두 검색 방식의 가중치를 적절히 조절하는 것이 성능 최적화의 핵심입니다.",
-    "metadata": {
-      "source": "./data/sample2.txt",
-      "index": 4,
-      "total_chunks": 5,
-      "prev_chunk_id": "sample2.txt::chunk::3",
-      "next_chunk_id": null,
-      "chunking_strategy": "simple"
-    }
-  },
-  {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::0",
-    "text": "# 백돈 레시피 가이드\n백돈의 시그니처 메뉴 레시피와 조리 가이드입니다.",
-    "metadata": {
-      "source": "./data/test_hierarchy.md",
-      "index": 0,
-      "total_chunks": 16,
-      "prev_chunk_id": null,
-      "next_chunk_id": "test_hierarchy.md::chunk::1",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::3",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::5",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::1",
-    "text": "# 백돈 레시피 가이드\n## 메뉴 소개\n백돈은 프리미엄 돈까스 전문점으로, 엄선된 국내산 돼지고기와 특제 소스로 유명합니다.",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::5",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 돈카츠류\n### 백돈 치즈 카츠\n- 수량: 2개\n- 소스\n  - 기본 돈까스 소스\n  - 3구 소스\n- 국물: 장국\n---",
     "metadata": {
-      "source": "./data/test_hierarchy.md",
-      "index": 1,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::0",
-      "next_chunk_id": "test_hierarchy.md::chunk::2",
-      "chunking_strategy": "hierarchical"
-    }
-  },
-  {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::2",
-    "text": "# 백돈 레시피 가이드\n## 메뉴 소개\n### 시그니처 메뉴\n#### 클래식 돈까스\n백돈의 대표 메뉴로, 두툼한 등심을 사용한 정통 돈까스입니다.\n**재료 (1인분)**\n| 재료 | 용량 | 비고 |\n|------|------|------|\n| 돼지 등심 | 200g | 국내산 1등급 |\n| 빵가루 | 100g | 일본식 생빵가루 |\n| 계란 | 2개 | 신선란 |\n| 밀가루 | 50g | 박력분 |\n| 식용유 | 500ml | 튀김용 |\n| 소금, 후추 | 약간 | 밑간용 |\n**조리 순서**\n1. 등심 준비\n   - 두께 2cm로 자르기\n   - 칼등으로 두드려 부드럽게 만들기\n   - 소금, 후추로 밑간 (양면 각 5분)\n2. 튀김옷 입히기\n   - 밀가루 → 계란물 → 빵가루 순서\n   - 빵가루는 꾹꾹 눌러 밀착\n3. 튀기기\n   - 기름 온도: 170°C\n   - 1차 튀김: 3분 (겉면 익히기)\n   - 휴지: 2분 (기름 빼기)\n   - 2차 튀김: 2분 (바삭하게)\n**⚠️ CRITICAL 포인트**\n- 기름 온도가 160°C 이하면 눅눅해집니다\n- 2차 튀김을 생략하면 바삭함이 떨어집니다\n- 휴지 시간을 반드시 지켜야 육즙이 보존됩니다\n#### 치즈 돈까스\n클래식 돈까스에 모짜렐라 치즈를 넣은 인기 메뉴입니다.\n**재료 차이점**\n| 재료 | 용량 | 추가 설명 |\n|------|------|-----------|\n| 모짜렐라 치즈 | 80g | 슬라이스 형태 |\n| 등심 | 250g | 클래식보다 두껍게 |\n**조리법 변경사항**\n1. 등심을 옆면에서 칼집을 넣어 주머니 만들기\n2. 치즈를 주머니 안에 넣기\n3. 이쑤시개로 입구 고정\n4. 클래식과 동일한 방법으로 튀김\n**⚠️ CRITICAL 포인트**\n- 치즈가 새지 않도록 입구를 완전히 밀봉해야 합니다\n- 튀김 시간을 30초 더 늘려야 속까지 익습니다\n- 치즈가 녹아 흐르므로 바로 서빙해야 합니다",
-    "metadata": {
-      "source": "./data/test_hierarchy.md",
-      "index": 2,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::1",
-      "next_chunk_id": "test_hierarchy.md::chunk::3",
-      "chunking_strategy": "hierarchical"
-    }
-  },
-  {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::3",
-    "text": "# 백돈 레시피 가이드\n## 소스 레시피",
-    "metadata": {
-      "source": "./data/test_hierarchy.md",
-      "index": 3,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::2",
-      "next_chunk_id": "test_hierarchy.md::chunk::4",
-      "chunking_strategy": "hierarchical"
-    }
-  },
-  {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::4",
-    "text": "# 백돈 레시피 가이드\n## 소스 레시피\n### 특제 돈까스 소스\n백돈만의 시그니처 소스입니다.\n**재료**\n| 재료 | 용량 | 비고 |\n|------|------|------|\n| 토마토 케첩 | 200ml | 하인즈 추천 |\n| 우스터 소스 | 100ml | 리앤페린스 |\n| 설탕 | 50g | 백설탕 |\n| 간장 | 30ml | 진간장 |\n| 사과 | 1개 | 갈아서 사용 |\n| 양파 | 1/2개 | 갈아서 사용 |\n**만드는 법**\n1. 사과와 양파를 믹서에 갈기\n2. 모든 재료를 냄비에 넣고 중불에서 10분 끓이기\n3. 체에 거르기\n4. 냉장 보관 (2주 이내 사용)\n**⚠️ CRITICAL 포인트**\n- 너무 오래 끓이면 신맛이 강해집니다\n- 사과와 양파는 반드시 갈아야 부드럽습니다\n- 냉장 보관 시 밀폐 용기 사용 필수",
-    "metadata": {
-      "source": "./data/test_hierarchy.md",
-      "index": 4,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::3",
-      "next_chunk_id": "test_hierarchy.md::chunk::5",
-      "chunking_strategy": "hierarchical"
-    }
-  },
-  {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::5",
-    "text": "# 백돈 레시피 가이드\n## 소스 레시피\n### 타르타르 소스\n생선까스와 새우까스에 곁들이는 소스입니다.\n**재료**\n- 마요네즈: 200g\n- 삶은 계란: 2개 (잘게 다지기)\n- 피클: 50g (잘게 다지기)\n- 양파: 1/4개 (다지기)\n- 레몬즙: 1큰술\n- 설탕: 1작은술\n- 소금, 후추: 약간\n**만드는 법**\n1. 모든 재료를 섞기\n2. 냉장고에서 1시간 숙성\n3. 서빙 직전 꺼내기",
-    "metadata": {
-      "source": "./data/test_hierarchy.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 5,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::4",
-      "next_chunk_id": "test_hierarchy.md::chunk::6",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::4",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::6",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::6",
-    "text": "# 백돈 레시피 가이드\n## 사이드 메뉴",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::6",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 돈카츠류\n### 백돈 고구마 치즈 카츠\n- 수량: 2개\n- 구성\n  - 치즈 위 고구마 무스\n- 컷팅 옵션\n  - 노컷팅 선택 시 모서리에 고구마 무스 2회\n- 소스\n  - 기본 돈까스 소스\n  - 3구 소스\n- 국물: 장국\n---",
     "metadata": {
-      "source": "./data/test_hierarchy.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 6,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::5",
-      "next_chunk_id": "test_hierarchy.md::chunk::7",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::5",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::7",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::7",
-    "text": "# 백돈 레시피 가이드\n## 사이드 메뉴\n### 양배추 샐러드\n돈까스와 함께 제공되는 기본 샐러드입니다.\n**재료 (4인분)**\n- 양배추: 1/4통\n- 당근: 1/2개\n- 참깨 드레싱: 100ml\n**준비 방법**\n1. 양배추를 채썰기 (0.3cm 두께)\n2. 찬물에 10분 담가 아삭함 살리기\n3. 물기 완전히 제거\n4. 당근 채썰어 섞기\n5. 서빙 직전 드레싱 뿌리기\n**⚠️ CRITICAL 포인트**\n- 물기가 남으면 드레싱이 묽어집니다\n- 미리 드레싱을 뿌리면 양배추가 눅눅해집니다",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::7",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 돈카츠류\n### 백돈 마라 돈까스\n- 선택 옵션\n  - 등심 선택 시\n    - 중량: 180g\n    - 최대 2덩어리\n  - 안심 선택 시\n    - 수량: 3덩어리\n    - 총 중량: 180g\n  - 치즈 선택 시\n    - 수량: 2개\n- 소스\n  - 마라 돈까스 소스\n  - 3구 소스\n- 국물: 장국\n---",
     "metadata": {
-      "source": "./data/test_hierarchy.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 7,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::6",
-      "next_chunk_id": "test_hierarchy.md::chunk::8",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::6",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::8",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::8",
-    "text": "# 백돈 레시피 가이드\n## 사이드 메뉴\n### 미소시루\n일본식 된장국으로 돈까스와 궁합이 좋습니다.\n**재료 (4인분)**\n| 재료 | 용량 |\n|------|------|\n| 다시마 육수 | 800ml |\n| 미소 (된장) | 60g |\n| 두부 | 150g |\n| 파 | 2대 |\n| 다시마 | 10cm |\n**만드는 법**\n1. 다시마를 물에 넣고 약불에서 10분 우리기\n2. 다시마 건져내기\n3. 미소를 체에 거르며 풀기\n4. 두부와 파 넣고 1분 끓이기\n5. 바로 서빙",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::8",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 돈카츠류\n### 백돈 함박 볼카츠\n- 구성\n  - 함박 볼카츠 완제품 4개\n- 조리\n  - 조리 시간: 7분 30초\n  - 레스팅: 10분\n- 도시락 제공 시\n  - 와사비 8g 담기\n- 소스\n  - 일반 돈까스 소스\n- 국물: 장국\n---",
     "metadata": {
-      "source": "./data/test_hierarchy.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 8,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::7",
-      "next_chunk_id": "test_hierarchy.md::chunk::9",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::7",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::9",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::9",
-    "text": "# 백돈 레시피 가이드\n## 품질 관리 기준",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::9",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 돈카츠류\n### 백돈 치킨 카츠\n- 중량: 240g\n- 사전 처리\n  - 포션 완료 치킨 사용\n  - 전자레인지 해동\n- 조리\n  - 기본 조리\n  - 두께가 두꺼울 경우 6분 조리\n- 소스\n  - 일반 돈까스 소스\n  - 3구 소스\n- 국물: 장국\n---",
     "metadata": {
-      "source": "./data/test_hierarchy.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 9,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::8",
-      "next_chunk_id": "test_hierarchy.md::chunk::10",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::8",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::10",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::10",
-    "text": "# 백돈 레시피 가이드\n## 품질 관리 기준\n### 온도 관리\n| 단계 | 온도 | 시간 |\n|------|------|------|\n| 재료 보관 | 0-4°C | - |\n| 튀김 1차 | 170°C | 3분 |\n| 튀김 2차 | 180°C | 2분 |\n| 서빙 온도 | 65-70°C | - |\n**⚠️ CRITICAL 포인트**\n- 재료는 반드시 냉장 보관\n- 튀김 온도는 온도계로 정확히 측정\n- 서빙 온도가 60°C 이하면 재조리",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::10",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 세트 메뉴 변경 기준",
     "metadata": {
-      "source": "./data/test_hierarchy.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 10,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::9",
-      "next_chunk_id": "test_hierarchy.md::chunk::11",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::9",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::11",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::11",
-    "text": "# 백돈 레시피 가이드\n## 품질 관리 기준\n### 위생 기준\n1. 조리 전 손 씻기 (30초 이상)\n2. 도마와 칼 소독 (매 사용 후)\n3. 기름 교체 (하루 2회)\n4. 작업대 청소 (매 시간)",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::11",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 세트 메뉴 변경 기준\n### 세트 카츠류 변경\n- 등심 카츠 변경 (130g)\n- 안심 카츠 변경 (130g)\n- 치즈 카츠 변경 (1개)\n- 고구마 치즈 카츠 변경 (1개)\n- 홀스래디쉬 카츠 변경 (130g)\n- 생선 카츠 변경 (2개)\n※ 동일 기준 반복 적용\n---",
     "metadata": {
-      "source": "./data/test_hierarchy.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 11,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::10",
-      "next_chunk_id": "test_hierarchy.md::chunk::12",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::10",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::12",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::12",
-    "text": "# 백돈 레시피 가이드\n## 자주 묻는 질문",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::12",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 세트 메뉴 변경 기준\n### 세트 면류 변경\n- 메밀 소바 변경\n  - 소바 3구\n- 우동 변경\n- 물 냉면 변경\n  - 식초 제공\n  - 겨자 제공\n- 비빔 냉면 변경\n  - 식초 제공\n  - 겨자 제공\n  - 냉면 육수 90g 제공\n---",
     "metadata": {
-      "source": "./data/test_hierarchy.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 12,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::11",
-      "next_chunk_id": "test_hierarchy.md::chunk::13",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::11",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::13",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::13",
-    "text": "# 백돈 레시피 가이드\n## 자주 묻는 질문\n### Q: 빵가루가 떨어지는 이유는?\n**A:** 계란물을 충분히 묻히지 않았거나, 빵가루를 꾹꾹 눌러 밀착시키지 않았기 때문입니다.",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::13",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 면류 단품",
     "metadata": {
-      "source": "./data/test_hierarchy.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 13,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::12",
-      "next_chunk_id": "test_hierarchy.md::chunk::14",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::12",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::14",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::14",
-    "text": "# 백돈 레시피 가이드\n## 자주 묻는 질문\n### Q: 속이 익지 않는 이유는?\n**A:** 고기가 너무 두껍거나, 기름 온도가 너무 높아 겉만 타고 속은 익지 않은 경우입니다. 1차 튀김 시간을 30초 늘려보세요.",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::14",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 면류 단품\n### 메밀 소바\n- 주의 사항\n  - 메밀면이 풀어질 경우 제공 불가\n- 구성\n  - 소바 육수 400ml\n  - 쪽파\n  - 김가루\n- 추가 제공\n  - 갈은 무\n  - 와사비\n  - 단무지\n- 면 수량\n  - 소바 3구\n---",
     "metadata": {
-      "source": "./data/test_hierarchy.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 14,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::13",
-      "next_chunk_id": "test_hierarchy.md::chunk::15",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::13",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::15",
       "chunking_strategy": "hierarchical"
     }
   },
   {
-    "doc_id": "test_hierarchy.md",
-    "chunk_id": "test_hierarchy.md::chunk::15",
-    "text": "# 백돈 레시피 가이드\n## 자주 묻는 질문\n### Q: 기름이 튀는 이유는?\n**A:** 고기의 물기를 제거하지 않았거나, 기름 온도가 너무 높기 때문입니다. 키친타월로 물기를 완전히 제거하세요.\n---\n**문서 버전:** 2.1  \n**최종 수정일:** 2024-12-25  \n**작성자:** 백돈 본점 주방팀",
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::15",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 면류 단품\n### 살얼음 물 냉면\n- 조리 시간: 45초\n- 구성\n  - 냉면 육수 400ml\n  - 냉면 소스 소량\n  - 오이\n  - 무김치\n  - 계란 반 개\n  - 깨\n- 제공\n  - 식초\n  - 겨자\n---",
     "metadata": {
-      "source": "./data/test_hierarchy.md",
+      "source": "./data/백돈_메뉴판.md",
       "index": 15,
-      "total_chunks": 16,
-      "prev_chunk_id": "test_hierarchy.md::chunk::14",
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::14",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::16",
+      "chunking_strategy": "hierarchical"
+    }
+  },
+  {
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::16",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 면류 단품\n### 비빔 냉면\n- 조리 시간: 45초\n- 기본 구성\n  - 냉면 육수 60ml\n  - 냉면 소스 반 국자\n  - 오이\n  - 무김치\n  - 계란 반 개\n  - 참기름\n  - 김가루\n  - 깨\n- 추가 제공\n  - 식초\n  - 겨자\n  - 냉면 육수 90g\n---",
+    "metadata": {
+      "source": "./data/백돈_메뉴판.md",
+      "index": 16,
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::15",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::17",
+      "chunking_strategy": "hierarchical"
+    }
+  },
+  {
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::17",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 면류 단품\n### 어묵 우동\n- 조리\n  - 포션 어묵 사용\n  - 우동면 조리 35초\n- 구성\n  - 우동 육수 500ml\n  - 우동 건더기\n  - 김가루\n- 별도 구성품 없음\n---",
+    "metadata": {
+      "source": "./data/백돈_메뉴판.md",
+      "index": 17,
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::16",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::18",
+      "chunking_strategy": "hierarchical"
+    }
+  },
+  {
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::18",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 면류 단품\n### 들기름 막국수\n- 조리\n  - 메밀면이 풀어진 후 추가 10~20초 조리\n- 구성\n  - 들기름 막국수 소스 60g\n  - 쪽파 6g\n  - 김가루 4g\n  - 통깨\n- 별도 구성품 없음\n---",
+    "metadata": {
+      "source": "./data/백돈_메뉴판.md",
+      "index": 18,
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::17",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::19",
+      "chunking_strategy": "hierarchical"
+    }
+  },
+  {
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::19",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 덮밥 및 볶음밥",
+    "metadata": {
+      "source": "./data/백돈_메뉴판.md",
+      "index": 19,
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::18",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::20",
+      "chunking_strategy": "hierarchical"
+    }
+  },
+  {
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::20",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 덮밥 및 볶음밥\n### 우삼겹 숙주 덮밥\n- 고기\n  - 우삼겹\n  - 소금, 후추 간\n- 소스\n  - 간장 소스 1국자\n  - 데리야끼 소스\n  - 마요네즈 소스\n- 구성\n  - 숙주 150g\n  - 밥 230g (도시락에 담기)\n  - 쪽파\n- 국물: 장국 제공\n---",
+    "metadata": {
+      "source": "./data/백돈_메뉴판.md",
+      "index": 20,
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::19",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::21",
+      "chunking_strategy": "hierarchical"
+    }
+  },
+  {
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::21",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 덮밥 및 볶음밥\n### 매콤 우삼겹 숙주 덮밥\n- 고기\n  - 우삼겹\n  - 소금, 후추 간\n- 소스\n  - 간장 소스 반 국자\n  - 매콤 소스 1국자 반\n- 구성\n  - 숙주 150g\n  - 밥 230g (도시락에 담기)\n  - 마요네즈 소스\n  - 쪽파\n- 국물: 장국 제공\n---",
+    "metadata": {
+      "source": "./data/백돈_메뉴판.md",
+      "index": 21,
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::20",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::22",
+      "chunking_strategy": "hierarchical"
+    }
+  },
+  {
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::22",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 덮밥 및 볶음밥\n### 참치 김치 볶음밥\n- 구성\n  - 포션 재료\n  - 김치 100g\n  - 기름 2스푼\n  - 볶음밥 소스 30g\n  - 밥 230g\n- 토핑\n  - 계란 후라이\n  - 김가루 7g\n  - 참기름 1회\n  - 통깨\n- 국물: 장국 제공\n---",
+    "metadata": {
+      "source": "./data/백돈_메뉴판.md",
+      "index": 22,
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::21",
+      "next_chunk_id": "백돈_메뉴판.md::chunk::23",
+      "chunking_strategy": "hierarchical"
+    }
+  },
+  {
+    "doc_id": "백돈_메뉴판.md",
+    "chunk_id": "백돈_메뉴판.md::chunk::23",
+    "text": "# 백돈 메뉴판 (내부 운영·조리 가이드 최종본)\n## 덮밥 및 볶음밥\n### 베이컨 김치 볶음밥\n- 구성\n  - 포션 재료\n  - 김치 100g\n  - 기름 3스푼\n  - 볶음밥 소스 30g\n  - 밥 230g\n- 토핑\n  - 계란 후라이\n  - 김가루 7g\n  - 참기름 1회\n  - 통깨\n- 국물: 장국 제공",
+    "metadata": {
+      "source": "./data/백돈_메뉴판.md",
+      "index": 23,
+      "total_chunks": 24,
+      "prev_chunk_id": "백돈_메뉴판.md::chunk::22",
       "next_chunk_id": null,
       "chunking_strategy": "hierarchical"
     }
